@@ -26,7 +26,7 @@ namespace ModeSDemodulator.Demo
     {
         public static void Main()
         {
-            // Initialize Demo1.
+            // Initialize Demo.
             try
             {
                 var demo = new Demo();

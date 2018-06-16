@@ -18,6 +18,7 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using RtlSdrManager;
@@ -152,11 +153,15 @@ namespace ModeSDemodulator.Demo
             // Start display thread.
             _displayTask = Task.Factory.StartNew(() =>
             {
+                // Clear the console and set the output encoding.
+                Console.OutputEncoding = Encoding.UTF8;
+                Console.Clear();
+                
                 // Save the start time
                 var startTime = DateTime.UtcNow;
                 
                 // Initialize the "spinner".
-                var spinnerChars = new[] {'/', '-', '\\', '|'};
+                var spinnerChars = new[] {'/', '-', '\\', '│'};
                 var spinnerPointer = 0;
 
                 // Timeout chars
@@ -164,9 +169,9 @@ namespace ModeSDemodulator.Demo
 
                 // Initialize table header.
                 // ICAO, Message Counter, Downlink Format (Actual / Previous), Last Seen, Raw Frame.
-                Console.WriteLine("+--------+-------+---------+------------------+----------------------------+---+");
-                Console.WriteLine("| ICAO   | Msgs. | DF      | Last Seen    T/O | Last Raw Frame             |   |");
-                Console.WriteLine("+--------+-------+---------+------------------+----------------------------+---+");
+                Console.WriteLine("┌────────┬───────┬─────────┬──────────────────┬────────────────────────────┬───┐");
+                Console.WriteLine("│ ICAO   │ Msgs. │ DF      │ Last Seen    T/O │ Last Raw Frame             │   │");
+                Console.WriteLine("├────────┼───────┼─────────┼──────────────────┼────────────────────────────┴───┤");
 
                 // Store spinner's position.
                 const int spinnerTop = 1;
@@ -184,13 +189,13 @@ namespace ModeSDemodulator.Demo
                 // Display the window.
                 for (var i = 0; i < windowHeight; i++)
                 {
-                    Console.WriteLine($"| {" ",71} |");
+                    Console.WriteLine($"│ {" ",71} │");
                 }
 
                 // Display the footer.
-                Console.WriteLine("+--------+-------+---------+------------------+--------------------------------+");
-                Console.WriteLine("| Buffer:                                                                      |");
-                Console.WriteLine("+------------------------------------------------------------------------------+");
+                Console.WriteLine("├────────┴───────┴─────────┴──────────────────┴────────────────────────────────┤");
+                Console.WriteLine("│ Buffer:                                                                      │");
+                Console.WriteLine("└──────────────────────────────────────────────────────────────────────────────┘");
 
                 // Save cursor current top position.
                 var windowBottom = Console.CursorTop;
@@ -246,23 +251,23 @@ namespace ModeSDemodulator.Demo
 
                         // Print everything.
                         Console.WriteLine(
-                            $"| {icao.Key:X6} " +
-                            $"| {(uint) icao.Value["messages"],5} " +
-                            $"| {(int) icao.Value["df"],-2} / {(int) icao.Value["ldf"],2} " +
-                            $"| {(DateTime) icao.Value["seen"]:hh:mm:ss tt} {timeoutBar,4} " +
-                            $"| {(string) icao.Value["raw"],-30} |");
+                            $"│ {icao.Key:X6} " +
+                            $"│ {(uint) icao.Value["messages"],5} " +
+                            $"│ {(int) icao.Value["df"],-2} / {(int) icao.Value["ldf"],2} " +
+                            $"│ {(DateTime) icao.Value["seen"]:hh:mm:ss tt} {timeoutBar,4} " +
+                            $"│ {(string) icao.Value["raw"],-30} │");
                     }
 
                     // Print the empty rows.
                     for (var i = 0; i < emptyRowNumber; i++)
                     {
-                        Console.WriteLine($"| {" ",6} | {" ",5} | {" ",7} | {" ",16} | {" ",30} |");
+                        Console.WriteLine($"│ {" ",6} │ {" ",5} │ {" ",7} │ {" ",16} │ {" ",30} │");
                     }
 
                     // Print the "..." characters.
                     if (moreICAOMessage)
                     {
-                        Console.WriteLine($"| ...    | {" ",5} | {" ",7} | {" ",16} | {" ",30} |");
+                        Console.WriteLine($"│ ...    │ {" ",5} │ {" ",7} │ {" ",16} │ {" ",30} │");
                     }
                     
                     // Update buffer info.
