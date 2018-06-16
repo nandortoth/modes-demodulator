@@ -1,0 +1,9 @@
+# JetBrains Rider IDE
+.idea/
+
+# Build results
+[Bb]in/
+[Oo]bj/
+
+# Visual Studio
+.vs/
