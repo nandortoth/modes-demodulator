@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <AssemblyName>ModeSDemodulator.Demo</AssemblyName>
+    <RootNamespace>ModeSDemodulator.Demo</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="RtlSdrManager" Version="0.2.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ModeSDemodulator\ModeSDemodulator.csproj" />
+  </ItemGroup>
+</Project>
