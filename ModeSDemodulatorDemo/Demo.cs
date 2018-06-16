@@ -165,7 +165,13 @@ namespace ModeSDemodulator.Demo
                 var spinnerPointer = 0;
 
                 // Timeout chars
-                var timeoutChars = new[] {'▁', '▃', '▄', '▅', '▆', '▇'};
+                var timeoutChars = new[]
+                {
+                    "■   ",
+                    "■■  ",
+                    "■■■ ",
+                    "■■■■"
+                };
 
                 // Initialize table header.
                 // ICAO, Message Counter, Downlink Format (Actual / Previous), Last Seen, Raw Frame.
