@@ -160,11 +160,11 @@ namespace ModeSDemodulator.Demo
                 // Save the start time
                 var startTime = DateTime.UtcNow;
                 
-                // Initialize the "spinner".
-                var spinnerChars = new[] {'/', '-', '\\', '│'};
+                // Initialize the "spinner" characters.
+                var spinnerChars = new[] {'/', '─', '\\', '|'};
                 var spinnerPointer = 0;
 
-                // Timeout chars
+                // Initialize the timeout characters.
                 var timeoutChars = new[]
                 {
                     "■   ",
@@ -172,18 +172,12 @@ namespace ModeSDemodulator.Demo
                     "■■■ ",
                     "■■■■"
                 };
-
-                // Initialize table header.
-                // ICAO, Message Counter, Downlink Format (Actual / Previous), Last Seen, Raw Frame.
-                Console.WriteLine("┌────────┬───────┬─────────┬──────────────────┬────────────────────────────┬───┐");
-                Console.WriteLine("│ ICAO   │ Msgs. │ DF      │ Last Seen    T/O │ Last Raw Frame             │   │");
-                Console.WriteLine("├────────┼───────┼─────────┼──────────────────┼────────────────────────────┴───┤");
-
+                
                 // Store spinner's position.
                 const int spinnerTop = 1;
                 const int spinnerLeft = 77;
 
-                // Store window's properties.
+                // Store the actual window's properties.
                 var windowHeight = Console.WindowHeight - 7;
                 const int windowLeft = 0;
                 const int windowTop = 3;
@@ -192,10 +186,16 @@ namespace ModeSDemodulator.Demo
                 var bufferInfoLeft = 10;
                 var bufferInfoTop = Console.WindowHeight - 3;
 
+                // Initialize table header.
+                // ICAO, Message Counter, Downlink Format (Actual / Previous), Last Seen, Raw Frame.
+                Console.WriteLine("┌────────┬───────┬─────────┬──────────────────┬────────────────────────────┬───┐");
+                Console.WriteLine("│ ICAO   │ Msgs. │ DF A/P  │ Last Seen    T/O │ Last Raw Frame             │   │");
+                Console.WriteLine("├────────┼───────┼─────────┼──────────────────┼────────────────────────────┴───┤");
+
                 // Display the window.
                 for (var i = 0; i < windowHeight; i++)
                 {
-                    Console.WriteLine($"│ {" ",71} │");
+                    Console.WriteLine($"│ {" ",6} │ {" ",5} │ {" ",7} │ {" ",16} │ {" ",30} │");
                 }
 
                 // Display the footer.
