@@ -15,6 +15,8 @@
 // along with this program.  If not, see http://www.gnu.org/licenses.
 
 using System;
+using System.Globalization;
+using System.Threading;
 using RtlSdrManager.Exceptions;
 
 namespace ModeSDemodulator.Demo
@@ -29,6 +31,10 @@ namespace ModeSDemodulator.Demo
             // Initialize Demo.
             try
             {
+                // Set en-US culture info.
+                Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
+                
+                // Initialize the demo.
                 var demo = new Demo();
 
                 // Stop the demo when CTRL+C.
