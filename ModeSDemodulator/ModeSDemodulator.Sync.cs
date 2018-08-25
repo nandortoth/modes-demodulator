@@ -32,11 +32,11 @@ namespace ModeSDemodulator
         /// <param name="samples"></param>
         public void DemodulateSamples(List<IQData> samples)
         {
-            // Check the asynchronious sample demodulation.
+            // Check the asynchronous sample demodulation.
             if (_asyncWorker != null)
             {
                 throw new ModeSLibraryExecutionException(
-                    "Problem happened during sample demodulation. Asynchronious sample demodulation is in progress.");
+                    "Problem happened during sample demodulation. Asynchronous sample demodulation is in progress.");
             }
 
             // Start processing of the samples.

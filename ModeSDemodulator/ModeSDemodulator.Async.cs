@@ -48,7 +48,7 @@ namespace ModeSDemodulator
             if (_asyncWorker != null)
             {
                 throw new ModeSLibraryExecutionException(
-                    "Problem happened during asynchronious sample demodulation." +
+                    "Problem happened during asynchronous sample demodulation." +
                     "The worker thread is already started.");
             }
 

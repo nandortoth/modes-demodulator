@@ -129,13 +129,13 @@ namespace ModeSDemodulator
             // Set the default timeout (3 minutes = 180 seconds).
             ICAOTimeOut = 180;
 
-            // Initialize trusted ICAO's list.
+            // Initialize trusted ICAOs list.
             _trustedICAOList = new ConcurrentDictionary<uint, DateTime>();
 
             // Initialize the ICAO maintain function.
             _icaoListMaintenanceTimer = new Timer(RemoveICAOWhenTimeout, null, 10000, 10000);
 
-            // Initialize candidate ICAO's list.
+            // Initialize candidate ICAOs list.
             _candidateICAOList = new ConcurrentDictionary<uint, Dictionary<string, object>>();
 
             // Initialize the frame buffer.
@@ -191,7 +191,7 @@ namespace ModeSDemodulator
             var pointer = _candidateFramePointer;
             var length = _candidateFrameBuffer.Length;
 
-            // Preample: 1, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0.
+            // Preamble: 1, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0.
             // The relation must be 1, 0, 1, 0, 0, 0, 0, 1, 0, 1.
             if (!(_candidateFrameBuffer[(pointer + 0) % length] > _candidateFrameBuffer[(pointer + 1) % length] &&
                   _candidateFrameBuffer[(pointer + 1) % length] < _candidateFrameBuffer[(pointer + 2) % length] &&
@@ -409,7 +409,7 @@ namespace ModeSDemodulator
                             return;
                         }
 
-                        // Update trused ICAO's "lastseen" value and remove the ICAO from the candidate list.
+                        // Update trusted ICAOs "last seen" value and remove the ICAO from the candidate list.
                         _trustedICAOList[icao] = DateTime.UtcNow;
                         _candidateICAOList.TryRemove(icao, out _);
 
@@ -500,9 +500,9 @@ namespace ModeSDemodulator
             //
             // If we scale up the results so that they range from 0 to 65535 (16 bits) then we need to multiply 
             // by 511.99, (or 516.02 or 514). Antirez's original code multiplies by 360, presumably because he's 
-            // assuming the maximim calculated amplitude is 181.019, and (181.019 * 360) = 65166.
+            // assuming the maximum calculated amplitude is 181.019, and (181.019 * 360) = 65166.
             //
-            // So lets see if we can improve things by subtracting 127.5, Well in integer arithmatic we can't
+            // So lets see if we can improve things by subtracting 127.5, Well in integer arithmetic we can't
             // subtract half, so, we'll double everything up and subtract one, and then compensate for the doubling 
             // in the multiplier at the end.
             //

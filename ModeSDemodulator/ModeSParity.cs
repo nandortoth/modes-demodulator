@@ -18,7 +18,7 @@ namespace ModeSDemodulator
 {
     /// <summary>
     /// Helper class to manage Address/Parity and Parity/Interrogation fields.
-    /// Discribed in 3.1.2.3.3.
+    /// Described in 3.1.2.3.3.
     /// </summary>
     internal static class ModeSParity
     {
